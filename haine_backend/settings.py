@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_restframework',
+    'haine_backend',
+    'haine_clip',
 ]
 
 MIDDLEWARE = [

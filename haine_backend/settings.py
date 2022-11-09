@@ -11,16 +11,23 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 from pathlib import Path
-from my_setting import SECRET, DATABASES
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET = 'django-insecure-r0l7x$@fke@0_+vy7mvem+3j2rlyrp4gq^43+zq41y%6)lkykm'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SECRET
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,6 +47,7 @@ INSTALLED_APPS = [
     'django_restframework',
     'haine_backend',
     'haine_clip',
+    "haine_backend.my_setting",
 ]
 
 MIDDLEWARE = [
@@ -72,11 +80,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'haine_backend.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/dev/ref/settings/#databases
-
-DATABASES = DATABASES
 
 
 # Password validation

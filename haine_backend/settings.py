@@ -11,14 +11,18 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 from pathlib import Path
-from .my_setting import SECRET, DATABASES, BASE_DIR
 
-BASE_DIR = BASE_DIR
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET = SECRET
+SECRET_KEY = 'django-insecure-r0l7x$@fke@0_+vy7mvem+3j2rlyrp4gq^43+zq41y%6)lkykm'
 
-DATABASES = DATABASES
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +32,7 @@ DATABASES = DATABASES
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

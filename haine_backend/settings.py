@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_restframework',
+    'rest_framework',
     'haine_backend',
     'haine_clip',
     "haine_backend.my_setting",

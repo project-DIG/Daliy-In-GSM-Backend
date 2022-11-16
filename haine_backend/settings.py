@@ -12,23 +12,15 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 from pathlib import Path
 import pymysql
+from my_setting import DATABASES, SECRET
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r0l7x$@fke@0_+vy7mvem+3j2rlyrp4gq^43+zq41y%6)lkykm'
-
 pymysql.install_as_MySQLdb()
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # mysqlclient librarly 설치
-        'NAME': 'haine',
-        'USER': 'root',
-        'PASSWORD': 'haineine', # mariaDB 설치 시 입력한 root 비밀번호 입력
-        'HOST': 'ls-512d03d427c3bf252df2ff74c1d7d7cb236d362a.cs8omt1ycslq.ap-northeast-2.rds.amazonaws.com',
-        'PORT': '3306'
-    }
-}
+SECRET_KEY = SECRET
+
+DATABASES = DATABASES
 
 
 # Quick-start development settings - unsuitable for production
@@ -110,7 +102,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+
+LANGUAGE_CODE = 'ko-kr'
 
 TIME_ZONE = 'Asia/Seoul'
 

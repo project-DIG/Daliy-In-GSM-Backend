@@ -11,11 +11,13 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 from pathlib import Path
-
+import pymysql
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-r0l7x$@fke@0_+vy7mvem+3j2rlyrp4gq^43+zq41y%6)lkykm'
+
+pymysql.install_as_MySQLdb()
 
 DATABASES = {
     'default': {

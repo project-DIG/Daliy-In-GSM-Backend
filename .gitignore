@@ -10,6 +10,8 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media
+haine_backend/settings.py
+haine_backend/my_setting.py
 my_setting.py
 settings.py
 

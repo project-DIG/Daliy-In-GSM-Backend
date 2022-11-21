@@ -10,6 +10,10 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media
+<<<<<<< HEAD
+=======
+haine_backend/settings.py
+>>>>>>> fcdc63b (:see_no_evil: my_setting, setting 뺴먹은거 삽입)
 haine_backend/my_setting.py
 my_setting.py
 

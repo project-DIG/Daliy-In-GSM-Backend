@@ -21,6 +21,7 @@ environ.Env.read_env(
 
 DEBUG = True
 
+pymysql.install_as_MySQLdb()
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
@@ -73,12 +74,12 @@ SECRET_KEY = env('SECRET_KEY')
 
 DATABASES = {
     'default': {
-        'ENGINE': env('DATABASE_ENGINE'),
-        'NAME': env('DATABASE_NAME'),
-        'USER': env('DATABASE_USER'),
-        'PASSWORD' : env('DATABASE_PASSWORD'),
-        'HOST':env('DATABASE_HOST'),
-        'PORT': env('DATABASE_PORT'),
+        'ENGINE': env('DATABASES_ENGINE'),
+        'NAME': env('DATABASES_NAME'),
+        'USER': env('DATABASES_USER'),
+        'PASSWORD' : env('DATABASES_PASSWORD'),
+        'HOST':env('DATABASES_HOST'),
+        'PORT': env('DATABASES_PORT'),
     }
 }
 

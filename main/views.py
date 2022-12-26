@@ -1,8 +1,8 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework import response, status
 
-from .serializers import VideoSerializer
-from .models import Video
+from .serializers import VideoSerializer, CommentSerializer
+from .models import Video, Comment
 
 class VideoAPIView(ListCreateAPIView):
     queryset = Video.objects.all()
@@ -39,3 +39,19 @@ class VideoDetailView(RetrieveUpdateDestroyAPIView):
     def delete(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
 
+class CommentAPIView(ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+
+    def post(self, request, pk):
+        serializer = self.serializer_class(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return response.Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)

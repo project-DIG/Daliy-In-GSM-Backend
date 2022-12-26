@@ -73,7 +73,7 @@ class AuthUserUserPermissions(models.Model):
 class Comment(models.Model):
     video = models.ForeignKey('Video', on_delete = models.CASCADE, related_name='+')
     commenter = models.ForeignKey('User', on_delete = models.CASCADE, related_name='+')
-    content = models.IntegerField()
+    content = models.TextField()
     like = models.IntegerField()
 
     class Meta:

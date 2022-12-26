@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'main',
     'pymysql',
     'environ',
-    'rest_framework'
+    'rest_framework',
+    'storages'
 
 ]
 
@@ -87,6 +88,9 @@ DATABASES = {
         'PASSWORD' : env('DATABASES_PASSWORD'),
         'HOST':env('DATABASES_HOST'),
         'PORT': env('DATABASES_PORT'),
+        'OPTIONS': {
+        'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
 
@@ -118,3 +122,17 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# AWS 관련 세팅
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_REGION = 'ap-northeast-2'
+
+###S3 Storages
+AWS_STORAGE_BUCKET_NAME = 'dig-gsm' 
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME,AWS_REGION)
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'path/to/store/my/files/')

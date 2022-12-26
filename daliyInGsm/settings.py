@@ -1,8 +1,8 @@
 
 from pathlib import Path
-import environ
 import os
 import pymysql  
+import environ
 
 pymysql.install_as_MySQLdb()
 
@@ -35,6 +35,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'daliyInGsm',
+    'main',
+    'pymysql',
+    'environ',
+    'rest_framework'
+
 ]
 
 MIDDLEWARE = [
@@ -66,6 +72,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'daliyInGsm.wsgi.application'
+
 
 
 # .env 관련 세팅들

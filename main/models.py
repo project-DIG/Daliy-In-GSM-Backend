@@ -1,10 +1,3 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
 
@@ -18,8 +11,8 @@ class AuthGroup(models.Model):
 
 class AuthGroupPermissions(models.Model):
     id = models.BigAutoField(primary_key=True)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, on_delete = models.CASCADE, related_name='+')
+    permission = models.ForeignKey('AuthPermission', on_delete = models.CASCADE, related_name='+')
 
     class Meta:
         managed = False
@@ -29,7 +22,7 @@ class AuthGroupPermissions(models.Model):
 
 class AuthPermission(models.Model):
     name = models.CharField(max_length=255)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    content_type = models.ForeignKey('DjangoContentType', on_delete = models.CASCADE, related_name='+')
     codename = models.CharField(max_length=100)
 
     class Meta:
@@ -57,8 +50,8 @@ class AuthUser(models.Model):
 
 class AuthUserGroups(models.Model):
     id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    user = models.ForeignKey(AuthUser, on_delete = models.CASCADE, related_name='+')
+    group = models.ForeignKey(AuthGroup, on_delete = models.CASCADE, related_name='+')
 
     class Meta:
         managed = False
@@ -68,8 +61,8 @@ class AuthUserGroups(models.Model):
 
 class AuthUserUserPermissions(models.Model):
     id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+    user = models.ForeignKey(AuthUser, on_delete = models.CASCADE, related_name='+')
+    permission = models.ForeignKey(AuthPermission, on_delete = models.CASCADE, related_name='+')
 
     class Meta:
         managed = False
@@ -78,8 +71,8 @@ class AuthUserUserPermissions(models.Model):
 
 
 class Comment(models.Model):
-    video = models.ForeignKey('Video', models.DO_NOTHING)
-    commenter = models.ForeignKey('User', models.DO_NOTHING)
+    video = models.ForeignKey('Video', on_delete = models.CASCADE, related_name='+')
+    commenter = models.ForeignKey('User', on_delete = models.CASCADE, related_name='+')
     content = models.IntegerField()
     like = models.IntegerField()
 
@@ -94,8 +87,8 @@ class DjangoAdminLog(models.Model):
     object_repr = models.CharField(max_length=200)
     action_flag = models.PositiveSmallIntegerField()
     change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    content_type = models.ForeignKey('DjangoContentType', on_delete = models.CASCADE, related_name='+', blank=True, null=True,)
+    user = models.ForeignKey(AuthUser,on_delete = models.CASCADE, related_name='+')
 
     class Meta:
         managed = False
@@ -134,8 +127,8 @@ class DjangoSession(models.Model):
 
 
 class Follow(models.Model):
-    user = models.ForeignKey('User', models.DO_NOTHING)
-    target = models.ForeignKey('User', models.DO_NOTHING)
+    user = models.ForeignKey('User',on_delete = models.CASCADE, related_name='+')
+    target = models.ForeignKey('User',on_delete = models.CASCADE, related_name='+')
 
     class Meta:
         managed = False
@@ -143,8 +136,8 @@ class Follow(models.Model):
 
 
 class Likes(models.Model):
-    user = models.ForeignKey('User', models.DO_NOTHING)
-    video = models.ForeignKey('Video', models.DO_NOTHING)
+    user = models.ForeignKey('User', on_delete = models.CASCADE, related_name='+')
+    video = models.ForeignKey('Video', on_delete = models.CASCADE, related_name='+')
     type = models.CharField(max_length=45)
 
     class Meta:
@@ -153,8 +146,8 @@ class Likes(models.Model):
 
 
 class Reply(models.Model):
-    comment = models.ForeignKey(Comment, models.DO_NOTHING)
-    commenter = models.ForeignKey('User', models.DO_NOTHING)
+    comment = models.ForeignKey('Comment', on_delete = models.CASCADE, related_name='+')
+    commenter = models.ForeignKey('User', on_delete = models.CASCADE,related_name='+')
     content = models.IntegerField()
     like = models.IntegerField()
 
@@ -180,7 +173,7 @@ class Video(models.Model):
     like = models.IntegerField()
     dislike = models.IntegerField()
     tag = models.CharField(max_length=45)
-    uploader = models.ForeignKey(User, models.DO_NOTHING)
+    uploader = models.ForeignKey('User', on_delete = models.CASCADE, related_name='+')
 
     class Meta:
         managed = False

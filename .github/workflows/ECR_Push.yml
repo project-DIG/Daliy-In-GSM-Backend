@@ -8,7 +8,7 @@ env:
   AWS_REGION: MY_AWS_REGION                  
   ECS_SERVICE: MY_ECS_SERVICE                
   ECS_CLUSTER: dig-main-cluster        
-  ECS_TASK_DEFINITION: ${{ secretds.MY_ECS_TASK_DEFINITION }}
+  ECS_TASK_DEFINITION: ${{ secrets.MY_ECS_TASK_DEFINITION }}
   CONTAINER_NAME: dig-main-container        
 
 permissions:

@@ -5,8 +5,8 @@ on:
     branches: [ "master" ]
 
 env:
-  AWS_REGION: MY_AWS_REGION                  
-  ECS_SERVICE: MY_ECS_SERVICE                
+  AWS_REGION: ap-northeast-2       
+  ECS_SERVICE: dig-app-ecs-service              
   ECS_CLUSTER: dig-main-cluster        
   ECS_TASK_DEFINITION: ${{ secrets.MY_ECS_TASK_DEFINITION }}
   CONTAINER_NAME: dig-main-container        

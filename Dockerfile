@@ -1,24 +1,26 @@
-# importing base image
 FROM python:3.10.5
 
-# updating docker host or host machine
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+ENV PYTHONUNBUFFERED 1
 
-# changing current working directory to /usr/src/app
-WORKDIR /usr/src/app
+ENV PATH="/scripts:${PATH}"
 
-# copying requirement.txt file to present working directory
-COPY requirements.txt ./
+ENV ENV=dev
 
-# installing dependency in container
-RUN pip install -r requirements.txt
+WORKDIR /app
 
-# copying all the files to present working directory
 COPY . .
 
+COPY ./scripts /scripts
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+RUN pip install -r requirements.txt --no-cache-dir 
 
-EXPOSE 8000
+RUN chmod +x /scripts/*
+
+RUN mkdir -p /vol/web/media
+RUN mkdir -p /vol/web/static
+RUN adduser user --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
+RUN chown -R user:user /vol
+RUN chmod -R 755 /vol/web
+USER user
+
+CMD ["entrypoint.sh"]

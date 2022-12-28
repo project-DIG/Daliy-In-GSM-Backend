@@ -2,23 +2,21 @@ version: "3"
 services:
     django:
         build:
-            context: ./django
-            dockerfile: ./Dockerfile.production
-        image: django-image
+            context: .
+            dockerfile: Dockerfile.production
+        image: 838235863925.dkr.ecr.ap-northeast-2.amazonaws.com/dig
         container_name: django-container
         entrypoint:
-            - /docker-entrypoint.production.sh
+            - daliyInGsm/nginx/docker-entrypoint.production.sh
     nginx:
         build:
             context: ./nginx
             dockerfile: ./Dockerfile.production
-        image: nginx-image
+        image: 838235863925.dkr.ecr.ap-northeast-2.amazonaws.com/dig-nginx
         container_name: nginx-container
         ports:
             - "80"
         depends_on:
             - django
-        links:
-            - django
         entrypoint:
-            - /docker-entrypoint.production.sh
+            - ./docker-entrypoint.production.sh

@@ -1,0 +1,24 @@
+version: "3"
+services:
+    django:
+        build:
+            context: ./django
+            dockerfile: ./Dockerfile.production
+        image: django-image
+        container_name: django-container
+        entrypoint:
+            - /docker-entrypoint.production.sh
+    nginx:
+        build:
+            context: ./nginx
+            dockerfile: ./Dockerfile.production
+        image: nginx-image
+        container_name: nginx-container
+        ports:
+            - "80"
+        depends_on:
+            - django
+        links:
+            - django
+        entrypoint:
+            - /docker-entrypoint.production.sh

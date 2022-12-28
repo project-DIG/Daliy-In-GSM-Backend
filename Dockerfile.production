@@ -1,0 +1,15 @@
+FROM python:3.10.5
+
+# Set Environment Variables
+ENV ...
+
+# Copy Source Codes
+COPY . /django
+WORKDIR /django
+
+# Install Python Packages
+RUN pip3 install --upgrade pip && pip3 install -r requirements/production.txt
+
+# Copy Entrypoint Script
+COPY docker-entrypoint.production.sh /docker-entrypoint.production.sh
+RUN chmod +x /docker-entrypoint.production.sh

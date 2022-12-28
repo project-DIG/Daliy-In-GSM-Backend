@@ -6,10 +6,10 @@ on:
 
 env:
     AWS_REGION: ap-northeast-2
-    ECS_SERVICE: dig-app-ecs-service
-    ECS_CLUSTER: dig-main-cluster
+    ECS_SERVICE: dig-django-service
+    ECS_CLUSTER: dig-django-cluster
     ECS_TASK_DEFINITION: ${{ secrets.MY_ECS_TASK_DEFINITION }}
-    CONTAINER_NAME: dig-main-container
+    CONTAINER_NAME: dig-django-container
 
 permissions:
     contents: read
@@ -41,14 +41,14 @@ jobs:
                   ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
                   IMAGE_TAG: ${{ github.sha }}
               run: |
-                  docker build -t ${{ secrets.MY_ECR }} .
-                  docker push ${{ secrets.MY_ECR }}
+                  docker compose build
+                  docker compose push
 
             - name: Fill in the new image ID in the Amazon ECS task definition
               id: task-def
               uses: aws-actions/amazon-ecs-render-task-definition@v1
               with:
-                  task-definition: task-definition.json
+                  task-definition: ${{ env.ECS_TASK_DEFINITION }}
                   container-name: ${{ env.CONTAINER_NAME }}
                   image: ${{ secrets.MY_IMAGE }}
 

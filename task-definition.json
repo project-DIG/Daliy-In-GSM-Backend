@@ -6,7 +6,7 @@
             "dnsSearchDomains": null,
             "environmentFiles": null,
             "logConfiguration": null,
-            "entryPoint": [],
+            "entryPoint": null,
             "portMappings": [
                 {
                     "hostPort": 0,
@@ -14,7 +14,7 @@
                     "containerPort": 8000
                 }
             ],
-            "command": [],
+            "command": null,
             "linuxParameters": null,
             "cpu": 512,
             "environment": [],
@@ -53,7 +53,7 @@
     "memory": null,
     "taskRoleArn": null,
     "compatibilities": ["EXTERNAL", "EC2"],
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:838235863925:task-definition/dig-django-task:1",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:838235863925:task-definition/dig-django-task:4",
     "family": "dig-django-task",
     "requiresAttributes": [
         {
@@ -68,7 +68,7 @@
     "networkMode": "bridge",
     "runtimePlatform": null,
     "cpu": null,
-    "revision": 1,
+    "revision": 4,
     "status": "ACTIVE",
     "inferenceAccelerators": null,
     "proxyConfiguration": null,

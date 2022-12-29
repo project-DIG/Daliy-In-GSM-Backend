@@ -41,9 +41,8 @@ jobs:
                   ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
                   IMAGE_TAG: ${{ github.sha }}
               run: |
-                  docker compose build
-                  docker compose push
-
+                  docker compose  build
+                  docker compose -f docker-compose.yml push
 
             - name: Fill in the new image ID in the Amazon ECS task definition
               id: task-def

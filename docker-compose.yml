@@ -5,18 +5,22 @@ services:
             context: .
             dockerfile: Dockerfile.production
         image: 838235863925.dkr.ecr.ap-northeast-2.amazonaws.com/dig
+        ports:
+            - "8000:8000"
         container_name: django-container
         entrypoint:
-            - daliyInGsm/nginx/docker-entrypoint.production.sh
+            - /docker-entrypoint.production.sh
     nginx:
         build:
             context: ./nginx
             dockerfile: ./Dockerfile.production
         image: 838235863925.dkr.ecr.ap-northeast-2.amazonaws.com/dig-nginx
+        ports:
+            - "80:80"
         container_name: nginx-container
         ports:
             - "80"
         depends_on:
             - django
         entrypoint:
-            - ./docker-entrypoint.production.sh
+            - /docker-entrypoint.production.sh

@@ -169,10 +169,10 @@ class User(models.Model):
 
 class Video(models.Model):
     title = models.CharField(max_length=45)
-    video_url = models.TextField()
-    like = models.IntegerField()
-    dislike = models.IntegerField()
-    tag = models.CharField(max_length=45)
+    video_url = models.TextField(blank=True)
+    like = models.IntegerField(blank=True, default=0)
+    dislike = models.IntegerField(blank=True, default=0)
+    tag = models.CharField(max_length=45, blank=True)
     uploader = models.ForeignKey('User', on_delete = models.CASCADE, related_name='+')
     video_upload = models.FileField()
 

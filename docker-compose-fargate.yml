@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+    web_service:
+        image: 838235863925.dkr.ecr.ap-northeast-2.amazonaws.com/dig:latest
+        ports:
+            - "8000:8000"
+        logging:
+            driver: awslogs
+            options:
+                awslogs-group: demo-web
+                awslogs-region: ap-northeast-2
+                awslogs-stream-prefix: demo-web
+
+    nginx:
+        image: 838235863925.dkr.ecr.ap-northeast-2.amazonaws.com/dig:latest
+        ports:
+            - "80:80"
+        logging:
+            driver: awslogs
+            options:
+                awslogs-group: demo-nginx
+                awslogs-region: ap-northeast-2
+                awslogs-stream-prefix: demo-nginx

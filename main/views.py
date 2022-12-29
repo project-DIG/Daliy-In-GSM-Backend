@@ -1,5 +1,11 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework import response, status
+import io
+from rest_framework.parsers import JSONParser
+from daliyInGsm.settings import AWS_S3_CUSTOM_DOMAIN
+import json
+import logging
+
 
 from .serializers import VideoSerializer, CommentSerializer
 from .models import Video, Comment
@@ -10,10 +16,11 @@ class VideoAPIView(ListCreateAPIView):
 
 
     def post(self, request):
+        request.data.__setitem__("video_url", f"https://{AWS_S3_CUSTOM_DOMAIN}/{request.data['video_upload']}")
         serializer = self.serializer_class(data=request.data)
 
         if serializer.is_valid():
-            serializer.save()
+            serializer.save()            
             return response.Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -39,6 +46,10 @@ class VideoDetailView(RetrieveUpdateDestroyAPIView):
     def delete(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
 
+
+
+#####################################################
+
 class CommentAPIView(ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
@@ -50,7 +61,6 @@ class CommentAPIView(ListCreateAPIView):
         if serializer.is_valid():
             serializer.save()
             return response.Response(serializer.data, status=status.HTTP_201_CREATED)
-
         return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, *args, **kwargs):

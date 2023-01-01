@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: django-app
+    namespace: prd-api
+spec:
+    selector:
+        matchLabels:
+            service: django-app
+    template:
+        metadata:
+            labels:
+                service: django-app
+        spec:
+            containers:
+                - name: app
+                  image: 838235863925.dkr.ecr.ap-northeast-2.amazonaws.com/dig:latest
+                  imagePullPolicy: Always
+                  name: djang-app    
+                  ports:
+                      - containerPort: 8000
+                        protocol: TCP

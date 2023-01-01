@@ -9,10 +9,16 @@ import logging
 
 from .serializers import VideoSerializer, CommentSerializer
 from .models import Video, Comment
+from rest_framework import pagination
+
+
+class VideoPagination(pagination.PageNumberPagination):
+    page_size = 5
 
 class VideoAPIView(ListCreateAPIView):
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
+    pagination_class = VideoPagination
 
 
     def post(self, request):

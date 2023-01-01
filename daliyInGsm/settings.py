@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'storages',
     'corsheaders'
 
+
 ]
 
 MIDDLEWARE = [
@@ -56,9 +57,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+}
+
 # CORS 관련 추가
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = ['*']
+CORS_ORIGIN_WHITELIST = ['https://*']
 CORS_ALLOW_CREDENTIALS = True
 
 

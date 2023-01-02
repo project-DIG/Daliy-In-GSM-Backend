@@ -13,7 +13,7 @@ from rest_framework import pagination
 
 
 class VideoPagination(pagination.PageNumberPagination):
-    page_size = 5
+    page_size = 3
 
 class VideoAPIView(ListCreateAPIView):
     queryset = Video.objects.all()

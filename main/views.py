@@ -34,6 +34,8 @@ class VideoAPIView(ListCreateAPIView):
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
+    
+
 
 class VideoDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Video.objects.all()

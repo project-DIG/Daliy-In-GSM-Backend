@@ -173,7 +173,7 @@ class Video(models.Model):
     like = models.IntegerField(blank=True, default=0)
     dislike = models.IntegerField(blank=True, default=0)
     tag = models.CharField(max_length=45, blank=True)
-    uploader = models.ForeignKey('User', on_delete = models.CASCADE, related_name='+')
+    uploader = models.ForeignKey('User', on_delete = models.CASCADE, blank=True, null=True, related_name='+')
     video_upload = models.FileField()
 
     class Meta:
